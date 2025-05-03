@@ -1,0 +1,139 @@
+﻿@model FitFriend.Models.ViewModels.DashboardViewModel
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to FitFriend</h1>
+    <p>Your personal fitness tracker and workout companion.</p>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h2>Recent Workouts</h2>
+            </div>
+            <div class="card-body">
+                @if (Model.RecentWorkouts != null && Model.RecentWorkouts.Any())
+                {
+                    <ul class="list-group">
+                        @foreach (var workout in Model.RecentWorkouts)
+                        {
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>@workout.WorkoutType</strong> - @workout.Date.ToShortDateString()
+                                    <p class="mb-0">@workout.Duration min</p>
+                                </div>
+                                <a asp-controller="Workout" asp-action="Details" asp-route-id="@workout.WorkoutId" class="btn btn-sm btn-primary">Details</a>
+                            </li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <p>No recent workouts found. Start working out!</p>
+                }
+                <div class="mt-3">
+                    <a asp-controller="Workout" asp-action="Create" class="btn btn-success">Log New Workout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h2>Active Goals</h2>
+            </div>
+            <div class="card-body">
+                @if (Model.ActiveGoals != null && Model.ActiveGoals.Any())
+                {
+                    <ul class="list-group">
+                        @foreach (var goal in Model.ActiveGoals)
+                        {
+                            <li class="list-group-item">
+                                <h5>@goal.GoalType</h5>
+                                <div class="progress">
+                                    @{
+                                        var progressPercent = (goal.CurrentValue / goal.TargetValue) * 100;
+                                        progressPercent = Math.Min(progressPercent, 100);
+                                    }
+                                    <div class="progress-bar" role="progressbar" style="width: @progressPercent%;"
+                                         aria-valuenow="@progressPercent" aria-valuemin="0" aria-valuemax="100">
+                                        @progressPercent.ToString("0")%
+                                    </div>
+                                </div>
+                                <small>Target: @goal.TargetValue | Current: @goal.CurrentValue</small>
+                            </li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <p>No active goals found. Set some goals!</p>
+                }
+                <div class="mt-3">
+                    <a asp-controller="Goal" asp-action="Create" class="btn btn-success">Set New Goal</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h2>Daily Activity</h2>
+            </div>
+            <div class="card-body">
+                @if (Model.LatestDailyLog != null)
+                {
+                    <div class="row">
+                        <div class="col-md-3 text-center">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <h3>@Model.LatestDailyLog.Steps</h3>
+                                    <p>Steps</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <h3>@Model.LatestDailyLog.CaloriesBurned</h3>
+                                    <p>Calories Burned</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <h3>@Model.LatestDailyLog.WaterIntake</h3>
+                                    <p>Water (oz)</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <h3>@Model.LatestDailyLog.SleepHours</h3>
+                                    <p>Sleep (hours)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <p>No daily log found for today. Start tracking your day!</p>
+                }
+                <div class="mt-3 text-center">
+                    <a asp-controller="DailyLog" asp-action="Create" class="btn btn-success">Update Daily Log</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
