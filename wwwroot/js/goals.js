@@ -28,7 +28,12 @@ $(function () {
     // Update goal progress
     $('#updateGoalBtn').on("click", function () {
         var goalId = $('#goalId').val();
-        var currentValue = $('#currentValue').val();
+        var currentValue = parseFloat($('#currentValue').val());
+
+        if (isNaN(currentValue) || currentValue < 0) {
+            alert('Please enter a valid numeric value for progress.');
+            return;
+        }
 
         $.ajax({
             url: '/api/GoalsApi/' + goalId,

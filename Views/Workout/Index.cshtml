@@ -1,0 +1,38 @@
+﻿@model IEnumerable<FitFriend.Models.Workout>
+
+@{
+    ViewData["Title"] = "Workouts";
+    
+}
+
+<h2>Workouts</h2>
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New Workout</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Type</th>
+            <th>Duration</th>
+            <th>User</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Date.ToShortDateString()</td>
+                <td>@item.WorkoutType</td>
+                <td>@item.Duration</td>
+                <td>@item.UserId</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.WorkoutId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.WorkoutId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.WorkoutId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

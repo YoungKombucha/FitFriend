@@ -1,0 +1,52 @@
+﻿@model IEnumerable<FitFriend.Models.Users>
+@if (TempData["AlertMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Success!</strong> @TempData["AlertMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+@{
+    ViewData["Title"] = "Users";
+}
+
+<h2>Users</h2>
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New User</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Date of Birth</th>
+            <th>Gender</th>
+            <th>Height</th>
+            <th>Weight</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.FirstName</td>
+                <td>@user.LastName</td>
+                <td>@user.Email</td>
+                <td>@user.DateOfBirth.ToShortDateString()</td>
+                <td>@user.Gender</td>
+                <td>@user.Height</td>
+                <td>@user.Weight</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@user.UserId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@user.UserId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@user.UserId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

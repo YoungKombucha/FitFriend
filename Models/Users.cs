@@ -4,10 +4,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FitFriend.Models
 {
-    public class Users
+    public class Users 
     {
         [Key]
         public int UserId { get; set; }
+
+        public string IdentityUserId { get; set; } = string.Empty;
 
         [Required]
         [StringLength(50)]
@@ -33,9 +35,9 @@ namespace FitFriend.Models
         public double Weight { get; set; }
 
         //Nav properties
-        public virtual ICollection<Workout> Workout { get; set; }
-        public virtual ICollection<Goal> Goals { get; set; }
-        public virtual ICollection<DailyLog> DailyLogs { get; set; }
+        public virtual ICollection<Workout> Workout { get; set; } = new List<Workout>();
+        public virtual ICollection<Goal> Goals { get; set; } = new List<Goal>();
+        public virtual ICollection<DailyLog> DailyLogs { get; set; } = new List<DailyLog>();
 
         // Methods
         public void Register() { /* Implementation */ }

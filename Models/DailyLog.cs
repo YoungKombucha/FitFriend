@@ -22,7 +22,7 @@ namespace FitFriend.Models
         public double SleepHours { get; set; }
 
         // Navigation properties
-        public virtual Users User { get; set; }
+        public virtual Users? User { get; set; }
 
         // Methods
         public void UpdateDailyLog() { /* Implementation */ }

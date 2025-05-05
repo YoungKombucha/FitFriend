@@ -43,5 +43,11 @@ namespace FitFriend.Data
                 .HasDiscriminator<string>("ExerciseType")
                 .HasValue<CardioExercise>("Cardio")
                 .HasValue<StrengthExercise>("Strength");
+                 // Optional: to prevent creating a table for the base class
+
+            modelBuilder.Entity<Exercise>()
+                .Property("ExerciseType")
+                .IsRequired();
         }
-}}
+    }
+}

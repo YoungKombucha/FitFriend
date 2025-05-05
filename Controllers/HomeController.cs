@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using FitFriend.Models;
 using FitFriend.Data;
 using FitFriend.Models.ViewModels;
+using System.Security.Claims;
 
 namespace FitFriend.Controllers
 {
@@ -23,12 +24,16 @@ namespace FitFriend.Controllers
 
         public async Task<IActionResult> Index()
         {
-            // For demo purposes, using the first user
-            // In a real app, you would use the authenticated user
-            var user = await _context.FitnessUsers.FirstOrDefaultAsync();
+            // Get the current logged-in user's ID
+            var identityUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            // Find the corresponding fitness user
+            var user = await _context.FitnessUsers
+                .FirstOrDefaultAsync(u => u.IdentityUserId == identityUserId);
 
             if (user == null)
             {
+                // If no fitness profile exists for this identity user
                 return View(new DashboardViewModel());
             }
 
@@ -49,11 +54,12 @@ namespace FitFriend.Controllers
                     .Where(g => g.UserId == user.UserId && g.EndDate >= DateTime.Now)
                     .ToListAsync(),
 
-                LatestDailyLog = latestDailyLog ?? new DailyLog() // Ensure non-null assignment
+                LatestDailyLog = latestDailyLog ?? new DailyLog()
             };
 
             return View(dashboard);
         }
+
 
         public IActionResult Privacy()
         {

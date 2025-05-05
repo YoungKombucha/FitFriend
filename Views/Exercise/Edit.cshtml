@@ -1,0 +1,29 @@
+﻿
+@model FitFriend.Models.Exercise
+
+@{
+    ViewData["Title"] = "Edit Exercise";
+}
+
+<h2>Edit Exercise</h2>
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="ExerciseId" />
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+        <label asp-for="ExerciseType"></label>
+        <select asp-for="ExerciseType" class="form-control">
+            <option value="">Select Type</option>
+            <option>Cardio</option>
+            <option>Strength</option>
+        </select>
+    </div>
+    <input type="submit" value="Save" class="btn btn-primary" />
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</form>

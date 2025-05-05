@@ -1,0 +1,41 @@
+﻿@model IEnumerable<FitFriend.Models.DailyLog>
+
+@{
+    ViewData["Title"] = "Daily Logs";
+}
+
+<h2>Daily Logs</h2>
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New Daily Log</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Steps</th>
+            <th>Calories Burned</th>
+            <th>Water Intake (oz)</th>
+            <th>Sleep Hours</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var log in Model)
+        {
+            <tr>
+                <td>@log.Date.ToShortDateString()</td>
+                <td>@log.Steps</td>
+                <td>@log.CaloriesBurned</td>
+                <td>@log.WaterIntake</td>
+                <td>@log.SleepHours</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@log.LogId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@log.LogId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@log.LogId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

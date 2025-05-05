@@ -1,0 +1,56 @@
+﻿@model IEnumerable<FitFriend.Models.Goal>
+
+@{
+    ViewData["Title"] = "Goals";
+
+
+}
+
+<h2>Goals</h2>
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New Goal</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Goal Type</th>
+            <th>Target Value</th>
+            <th>Current Value</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Progress</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var goal in Model)
+        {
+            var percent = goal.TargetValue > 0 ? (goal.CurrentValue / goal.TargetValue) * 100 : 0;
+            <tr>
+                <td>@goal.GoalType</td>
+                <td>@goal.TargetValue</td>
+                <td>@goal.CurrentValue</td>
+                <td>@goal.StartDate.ToShortDateString()</td>
+                <td>@goal.EndDate.ToShortDateString()</td>
+                <td>
+                    <div class="progress" style="height: 20px;">
+                        <div class="progress-bar bg-success"
+                             role="progressbar"
+                             style="width: 75%;"
+                             aria-valuenow="75"
+                             aria-valuemin="0"
+                             aria-valuemax="100">
+                            75%
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@goal.GoalId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@goal.GoalId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@goal.GoalId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

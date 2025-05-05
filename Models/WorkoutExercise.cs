@@ -19,8 +19,8 @@ namespace FitFriend.Models
 
         public double Weight { get; set; }
 
-        // Navigation properties
-        public virtual Workout Workout { get; set; }
-        public virtual Exercise Exercise { get; set; }
+        // Navigation properties  
+        public virtual Workout Workout { get; set; } = null!;
+        public virtual Exercise Exercise { get; set; } = null!;
     }
 }

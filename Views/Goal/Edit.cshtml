@@ -1,0 +1,32 @@
+﻿@model FitFriend.Models.Goal
+
+@{
+    ViewData["Title"] = "Edit Goal";
+}
+
+<h2>Edit Goal</h2>
+<form asp-action="Edit">
+    <input type="hidden" asp-for="GoalId" />
+    <div class="form-group">
+        <label asp-for="GoalType"></label>
+        <input asp-for="GoalType" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="TargetValue"></label>
+        <input asp-for="TargetValue" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="CurrentValue"></label>
+        <input asp-for="CurrentValue" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="StartDate"></label>
+        <input asp-for="StartDate" class="form-control" type="date" />
+    </div>
+    <div class="form-group">
+        <label asp-for="EndDate"></label>
+        <input asp-for="EndDate" class="form-control" type="date" />
+    </div>
+    <input type="submit" value="Save" class="btn btn-primary" />
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</form>

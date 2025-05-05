@@ -1,0 +1,25 @@
+﻿@model FitFriend.Models.DailyLog
+
+@{
+    ViewData["Title"] = "Daily Log Details";
+}
+
+<h2>Daily Log Details</h2>
+<div>
+    <h4>@Model.Date.ToShortDateString()</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-3">Steps</dt>
+        <dd class="col-sm-9">@Model.Steps</dd>
+        <dt class="col-sm-3">Calories Burned</dt>
+        <dd class="col-sm-9">@Model.CaloriesBurned</dd>
+        <dt class="col-sm-3">Water Intake (oz)</dt>
+        <dd class="col-sm-9">@Model.WaterIntake</dd>
+        <dt class="col-sm-3">Sleep Hours</dt>
+        <dd class="col-sm-9">@Model.SleepHours</dd>
+    </dl>
+</div>
+<p>
+    <a asp-action="Edit" asp-route-id="@Model.LogId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</p>

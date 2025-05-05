@@ -1,0 +1,31 @@
+﻿@model FitFriend.Models.DailyLog
+
+@{
+    ViewData["Title"] = "Create Daily Log";
+}
+
+<h2>Create Daily Log</h2>
+<form asp-action="Create">
+    <div class="form-group">
+        <label asp-for="Date"></label>
+        <input asp-for="Date" class="form-control" type="date" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Steps"></label>
+        <input asp-for="Steps" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="CaloriesBurned"></label>
+        <input asp-for="CaloriesBurned" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="WaterIntake"></label>
+        <input asp-for="WaterIntake" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="SleepHours"></label>
+        <input asp-for="SleepHours" class="form-control" />
+    </div>
+    <input type="submit" value="Create" class="btn btn-primary" />
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</form>

@@ -1,0 +1,24 @@
+﻿@model FitFriend.Models.Workout
+
+@{
+    ViewData["Title"] = "Workout Details";
+    
+
+}
+
+<h2>Workout Details</h2>
+<div>
+    <h4>@Model.WorkoutType on @Model.Date.ToShortDateString()</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">Duration</dt>
+        <dd class="col-sm-10">@Model.Duration minutes</dd>
+        <dt class="col-sm-2">Notes</dt>
+        <dd class="col-sm-10">@Model.Notes</dd>
+    </dl>
+</div>
+<p>
+    <a asp-action="Edit" asp-route-id="@Model.WorkoutId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</p>
+

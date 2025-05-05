@@ -1,0 +1,53 @@
+﻿@model FitFriend.Models.Users
+
+
+@{
+    ViewData["Title"] = "Edit User";
+}
+
+<h2>Edit User</h2>
+<form asp-action="Edit" method="Post">
+    <input type="hidden" asp-for="UserId" />
+    <!-- Repeat form fields as in Create.cshtml -->
+    <div class="form-group">
+        <label asp-for="FirstName"></label>
+        <input asp-for="FirstName" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="LastName"></label>
+        <input asp-for="LastName" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="PasswordHash">Password</label>
+        <input asp-for="PasswordHash" class="form-control" type="password" />
+    </div>
+    <div class="form-group">
+        <label asp-for="DateOfBirth"></label>
+        <input asp-for="DateOfBirth" class="form-control" type="date" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Gender"></label>
+        <select asp-for="Gender" class="form-control">
+            <option value="">Select Gender</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="Height"></label>
+        <input asp-for="Height" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Weight"></label>
+        <input asp-for="Weight" class="form-control" />
+    </div>
+    <!-- ... -->
+    <input type="submit" value="Save" class="btn btn-primary" />
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</form>
+
